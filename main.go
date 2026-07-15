@@ -6,6 +6,7 @@ import (
 	"github.com/coolspartak9819-rgb/kidmoney-app/internal/handler"
 	"github.com/coolspartak9819-rgb/kidmoney-app/internal/middleware"
 	"github.com/coolspartak9819-rgb/kidmoney-app/internal/repository"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -29,8 +30,8 @@ func main() {
 	// Группа публичных роутов
 	public := r.Group("/api")
 	{
-		public.POST("/register", handler.Register)
-		public.POST("/login", handler.Login)
+		public.POST("/register", middleware.Register)
+		public.POST("/login", middleware.Login)
 	}
 
 	// Группа защищенных роутов

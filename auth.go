@@ -1,12 +1,13 @@
-package middleware
+package handler
 
 import (
 	"database/sql"
 	"net/http"
 	"time"
 
-	"github.com/coolspartak9819-rgb/kidmoney-app/internal/model"
-	"github.com/coolspartak9819-rgb/kidmoney-app/internal/repository"
+	"kidmoney-app/internal/middleware"
+	"kidmoney-app/internal/model"
+	"kidmoney-app/internal/repository"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -94,7 +95,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	token, err := GenerateJWT(user.ID, user.Role)
+	token, err := middleware.GenerateJWT(user.ID, user.Role)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Ошибка при создании токена"})
 		return
